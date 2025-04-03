@@ -216,6 +216,40 @@ h1:hover {
     color: white;
 }
 
+/* Botón de descarga */
+.download-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(52, 152, 219, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0;
+    padding: 4px;
+}
+
+.download-button img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.image-card:hover .download-button {
+    opacity: 1;
+}
+
+.download-button:hover {
+    background-color: #3498db;
+    transform: scale(1.1);
+}
+
 /* Imágenes seleccionadas */
 .selected-images-container {
     margin-top: 3rem;

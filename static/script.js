@@ -87,12 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="image-select ${isSelected ? 'selected' : ''}">
                     <i class="fas ${isSelected ? 'fa-check' : 'fa-plus'}"></i>
                 </div>
+                <div class="download-button" title="Descargar imagen">
+                    <img src="/static/download-icon.svg" alt="Descargar" width="24" height="24">
+                </div>
             `;
             
             // Evento para seleccionar/deseleccionar imagen
             const selectButton = imageCard.querySelector('.image-select');
             selectButton.addEventListener('click', () => {
                 toggleImageSelection(image, selectButton);
+            });
+            
+            // Evento para descargar imagen
+            const downloadButton = imageCard.querySelector('.download-button');
+            downloadButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                downloadImage(image.largeImageURL, `pixabay-image-${image.id}`);
             });
             
             resultsContainer.appendChild(imageCard);
@@ -253,5 +263,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 notification.remove();
             }, 300);
         }, 3000);
+    }
+    
+    // Función para descargar imagen
+    function downloadImage(url, filename) {
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showNotification('Imagen descargada correctamente', 'success');
+            })
+            .catch(error => {
+                console.error('Error al descargar la imagen:', error);
+                showNotification('Error al descargar la imagen', 'error');
+            });
     }
 });
