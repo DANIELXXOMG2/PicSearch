@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Imágenes Pixabay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Búsqueda de Imágenes</h1>
+        </header>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Buscar imágenes...">
+                <button id="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="image-count">
+                <label for="image-count-select">Cantidad de imágenes:</label>
+                <select id="image-count-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10" selected>10</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Buscando imágenes...</p>
+            </div>
+            
+            <div id="results" class="results-grid"></div>
+            
+            <div class="selected-images-container">
+                <h2>Imágenes Seleccionadas (<span id="selected-count">0</span>)</h2>
+                <div id="selected-images" class="selected-images"></div>
+                <button id="save-button" class="save-button" disabled>Guardar en MongoDB</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
